@@ -11,14 +11,19 @@ package atividade1;
 %public
 %standalone
 %class Minijava
+%{
+	private 
+%}
 %eofclose
 
 /* Insira as regras l�xicas abaixo */
 ws = [\ \n\r\t\f]
 digit = [0-9]
-
 intl = {digit}+
 
+
 %%
+{ws} {}
+{digit} {}
 {intl}       { System.out.println("Token INT ("+yytext()+")"); }
 . { throw new RuntimeException("Caractere ilegal! '" + yytext() + "' na linha: " + yyline + ", coluna: " + yycolumn); }
