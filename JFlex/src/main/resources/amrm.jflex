@@ -15,17 +15,20 @@ package atividade1;
 
 /* Insira as regras l�xicas abaixo */
 id = (_|[:jletter:]) (_|[:jletterdigit:])*
-ws = [\ \n\r\t\f]
+ws = [\ \t\f]
+el = [\r\n]
 intl =  0|[1-9][0-9]*
-ic = [^\n\r]
-coment1 = "/**" [:jletterdigit:] "*"+ "/"
+cstart = "/*"
+cend = "*/"
+com = (cstart)"*"+
+comlinha = "//"[^el]*
 
 
 %%
-{coment1} {}
-"//"{ic}* {}
+{comlinha} {} //comentario de linha
+//{comente} {} //testar o comentário especifico
 {ws} {}
-{id} {}
+{id} {} 
 {intl} {}
 boolean {}
 class {}

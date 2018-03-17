@@ -5,7 +5,10 @@ class BinarySearch{
 }
 // This class contains an array of integers and
 // methods to initialize, print and search the array
-// using Binary Search
+//using Binary Search
+
+/*
+ *teste*/
 
 class BS{
     int[] number ;
@@ -14,9 +17,9 @@ class BS{
     // Invoke methods to initialize, print and search
     // for elements on the array
     public int Start(int sz){
-	int aux01 ;
+	int a_ux_01 ;
 	int aux02 ;
-	aux01 = this.Init(sz);
+	a_ux_01 = this.Init(sz);
 	aux02 = this.Print();
 	if (this.Search(8)) System.out.println(1) ;
 	else System.out.println(0) ;
@@ -47,10 +50,10 @@ class BS{
 	int left ;
 	boolean var_cont ;
 	int medium ;
-	int aux01 ;
+	int a_ux_01 ;
 	int nt ;
 
-	aux01 = 0 ;
+	a_ux_01 = 0 ;
 	bs01 = false ;
 	right = number.length ;
 	right = right - 1 ;
@@ -59,16 +62,16 @@ class BS{
 	while (var_cont){
 	    medium = left + right ;
 	    medium = this.Div(medium);
-	    aux01 = number[medium] ;
-	    if (num < aux01) right = medium - 1 ;
+	    a_ux_01 = number[medium] ;
+	    if (num < a_ux_01) right = medium - 1 ;
 	    else left = medium + 1 ;
-	    if (this.Compare(aux01,num)) var_cont = false ;
+	    if (this.Compare(a_ux_01,num)) var_cont = false ;
 	    else var_cont = true ;
 	    if (right < left) var_cont = false ;
 	    else nt = 0 ;
 	}
 
-	if (this.Compare(aux01,num)) bs01 = true ;
+	if (this.Compare(a_ux_01,num)) bs01 = true ;
 	else bs01 = false ;
 	return bs01 ;
     }
@@ -125,7 +128,7 @@ class BS{
 	int j ;
 	int k ;
 	int aux02 ;
-	int aux01 ;
+	int a_ux_01 ;
 
 	size = sz ;
 	number = new int[sz] ;
@@ -133,9 +136,9 @@ class BS{
 	j = 1 ;
 	k = size + 1 ;
 	while (j < (size)) {
-	    aux01 = 2 * j ;
+	    a_ux_01 = 2 * j ;
 	    aux02 = k - 3 ;
-	    number[j] = aux01 + aux02 ;
+	    number[j] = a_ux_01 + aux02 ;
 	    j = j + 1 ;
 	    k = k - 1 ;
 	}
