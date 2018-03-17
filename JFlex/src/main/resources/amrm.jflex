@@ -22,8 +22,12 @@ ws = {flinha} | [\ \t\f]
 comlinha = "//"[^\r\n]*
 comente = "/*"
 
+%state TAG
 
 %%
+<TAG> {
+	[intl] {yybegin(YYINITIAL);}
+}
 {intl} {
 	try {
 		System.out.println(yytext());
@@ -74,3 +78,4 @@ System.out.println {}
 "<" {}
 "&&" {}
 . { throw new RuntimeException("Caractere ilegal! '" + yytext() + "' na linha: " + yyline + ", coluna: " + yycolumn); }
+
