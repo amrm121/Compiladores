@@ -1,2 +1,2 @@
 # Compiladores
-branch v1 - atividade 1 (JFlex)
+Primeira fase de um compilador, analisador lexicográfico.
