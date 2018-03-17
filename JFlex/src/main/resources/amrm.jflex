@@ -14,19 +14,18 @@ package atividade1;
 %eofclose
 
 /* Insira as regras l�xicas abaixo */
+flinha = \r|\n|\r\n
+ic = [^\r\n]
 id = (_|[:jletter:]) (_|[:jletterdigit:])*
-ws = [\ \t\f]
-el = [\r\n]
+ws = {flinha} | [\ \t\f]
 intl =  0|[1-9][0-9]*
-cstart = "/*"
-cend = "*/"
-com = (cstart)"*"+
-comlinha = "//"[^el]*
+comlinha = "//"[^\r\n]*
+comente = "/*" ~"/*"
 
 
 %%
 {comlinha} {} //comentario de linha
-//{comente} {} //testar o comentário especifico
+{comente} {} //testar o comentário especifico
 {ws} {}
 {id} {} 
 {intl} {}

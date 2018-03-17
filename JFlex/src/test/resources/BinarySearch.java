@@ -7,8 +7,8 @@ class BinarySearch{
 // methods to initialize, print and search the array
 //using Binary Search
 
-/*
- *teste*/
+/* 
+ * */
 
 class BS{
     int[] number ;
