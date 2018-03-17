@@ -7,8 +7,6 @@ class BinarySearch{
 // methods to initialize, print and search the array
 //using Binary Search
 
-/* 
- * */
 
 class BS{
     int[] number ;
@@ -38,7 +36,7 @@ class BS{
 	if (this.Search(50)) System.out.println(1) ;
 	else System.out.println(0) ;
 
-	return 999 ;
+	return 99-9 ;
     }
 
 

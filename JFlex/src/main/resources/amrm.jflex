@@ -14,25 +14,32 @@ package atividade1;
 %eofclose
 
 /* Insira as regras l�xicas abaixo */
+intl =  0|[1-9][0-9]*
 flinha = \r|\n|\r\n
 ic = [^\r\n]
-id = (_|[:jletter:]) (_|[:jletterdigit:])*
+id = (_|[:jletter:])(_|[:jletterdigit:])*
 ws = {flinha} | [\ \t\f]
-intl =  0|[1-9][0-9]*
 comlinha = "//"[^\r\n]*
-comente = "/*" ~"/*"
+comente = "/*"
 
 
 %%
+{intl} {
+	try {
+		System.out.println(yytext());
+		Integer.parseInt(yytext());
+	}catch(Exception e) {
+		throw new RuntimeException();
+	}
+}
 {comlinha} {} //comentario de linha
 {comente} {} //testar o comentário especifico
 {ws} {}
 {id} {} 
-{intl} {}
 boolean {}
 class {}
 public {}
-extends {} '
+extends {} 
 static {}
 void {}
 main {}
