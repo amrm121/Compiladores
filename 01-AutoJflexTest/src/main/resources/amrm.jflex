@@ -14,9 +14,11 @@ package atividade1;
 %eofclose
 
 /* Insira as regras l�xicas abaixo */
+ws = [\ \n\r\t\f]
+digit = [0-9]
+
+intl = {digit}+
 
 %%
-    
-/* Insira as regras l�xicas no espa�o acima */     
-     
+{intl}       { System.out.println("Token INT ("+yytext()+")"); }
 . { throw new RuntimeException("Caractere ilegal! '" + yytext() + "' na linha: " + yyline + ", coluna: " + yycolumn); }

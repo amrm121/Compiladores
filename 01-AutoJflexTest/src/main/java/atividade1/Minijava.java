@@ -33,8 +33,8 @@ public class Minijava {
    * Translates characters to character classes
    */
   private static final String ZZ_CMAP_PACKED = 
-    "\12\0\1\1\1\1\1\1\1\1\167\0\1\1\u1fa2\0\1\1\1\1"+
-    "\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
+    "\11\0\1\0\1\2\1\2\1\2\1\2\22\0\1\0\17\0\12\1"+
+    "\113\0\1\2\u1fa2\0\1\2\1\2\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
 
   /** 
    * Translates characters to character classes
@@ -47,10 +47,10 @@ public class Minijava {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2";
+    "\1\0\1\1\1\2\1\3";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[3];
+    int [] result = new int[4];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -75,10 +75,10 @@ public class Minijava {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\2\0\2";
+    "\0\0\0\3\0\6\0\3";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[3];
+    int [] result = new int[4];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -101,10 +101,10 @@ public class Minijava {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\1\3\2\0";
+    "\1\2\1\3\1\4\4\0\1\3\1\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[4];
+    int [] result = new int[9];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -142,10 +142,10 @@ public class Minijava {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\2\11";
+    "\1\0\1\11\1\1\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[3];
+    int [] result = new int[4];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -220,6 +220,9 @@ public class Minijava {
    */
   private int zzFinalHighSurrogate = 0;
 
+  /* user code: */
+ Reader r = new InputStreamReader(input);
+
 
   /**
    * Creates a new scanner
@@ -241,7 +244,7 @@ public class Minijava {
     char [] map = new char[0x110000];
     int i = 0;  /* index in packed string  */
     int j = 0;  /* index in unpacked array */
-    while (i < 54) {
+    while (i < 64) {
       int  count = packed.charAt(i++);
       char value = packed.charAt(i++);
       do map[j++] = value; while (--count > 0);
@@ -607,11 +610,15 @@ public class Minijava {
           case 1: 
             { throw new RuntimeException("Caractere ilegal! '" + yytext() + "' na linha: " + yyline + ", coluna: " + yycolumn);
             }
-          case 3: break;
+          case 4: break;
           case 2: 
+            { System.out.println("Token INT ("+yytext()+")");
+            }
+          case 5: break;
+          case 3: 
             { System.out.print(yytext());
             }
-          case 4: break;
+          case 6: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }
