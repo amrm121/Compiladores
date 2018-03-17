@@ -32,7 +32,7 @@ comente = "/*" ~"/*"
 boolean {}
 class {}
 public {}
-extends {}
+extends {} '
 static {}
 void {}
 main {}
