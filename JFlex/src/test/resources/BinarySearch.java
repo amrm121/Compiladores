@@ -9,11 +9,11 @@ class BinarySearch{
 
 /* 
  * 
+ 
  * 
  * teste comentáriossss
  * blé
-argbdsasf
- */*
+ */
 
 
 class BS{
@@ -47,7 +47,10 @@ class BS{
 	return 99-9 ;
     }
 
-
+/* 
+ * /*
+ * aa-aa
+ */
     // Search for a specific value (num) using
     // binary search
     public boolean Search(int num){

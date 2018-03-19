@@ -18,9 +18,9 @@ public class Minijava {
 
   /** lexical states */
   public static final int YYINITIAL = 0;
-  public static final int TAG = 2;
-  public static final int IF = 4;
-  public static final int WHILE = 6;
+  public static final int IF = 2;
+  public static final int WHILE = 4;
+  public static final int INT = 6;
   public static final int COMENT = 8;
 
   /**
@@ -30,7 +30,7 @@ public class Minijava {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = { 
-     0,  0,  1,  1,  0,  0,  0,  0,  2, 2
+     0,  0,  0,  0,  0,  0,  1,  1,  2, 3
   };
 
   /** 
@@ -38,12 +38,12 @@ public class Minijava {
    */
   private static final String ZZ_CMAP_PACKED = 
     "\11\6\1\7\1\4\1\12\1\13\1\3\16\6\4\0\1\7\1\34"+
-    "\2\0\1\5\1\0\1\35\1\0\1\32\1\32\1\11\1\32\1\32"+
-    "\1\32\1\32\1\10\1\1\11\2\1\0\1\32\1\32\1\33\3\0"+
-    "\22\5\1\27\7\5\1\32\1\0\1\32\1\0\1\5\1\0\1\5"+
-    "\1\5\1\5\1\5\1\20\1\5\1\5\1\5\1\25\2\5\1\17"+
-    "\1\26\1\21\1\16\1\23\1\5\1\30\1\22\1\15\1\24\1\5"+
-    "\1\5\1\5\1\31\1\5\1\32\1\0\1\32\1\0\6\6\1\14"+
+    "\2\0\1\5\1\0\1\35\1\0\1\7\1\7\1\11\1\7\1\7"+
+    "\1\7\1\7\1\10\1\1\11\2\1\0\1\7\1\7\1\33\3\0"+
+    "\22\5\1\30\7\5\1\7\1\0\1\7\1\0\1\5\1\0\1\15"+
+    "\1\5\1\5\1\5\1\22\1\15\1\5\1\15\1\17\2\5\1\21"+
+    "\1\27\1\23\1\20\1\25\1\5\1\31\1\24\1\16\1\26\1\5"+
+    "\1\5\1\5\1\32\1\5\1\7\1\0\1\7\1\0\6\6\1\14"+
     "\32\6\2\0\4\5\4\0\1\5\2\0\1\6\7\0\1\5\4\0"+
     "\1\5\5\0\27\5\1\0\37\5\1\0\u01ca\5\4\0\14\5\16\0"+
     "\5\5\7\0\1\5\1\0\1\5\21\0\160\6\5\5\1\0\2\5"+
@@ -191,13 +191,12 @@ public class Minijava {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\3\0\1\1\4\2\1\1\1\3\2\2\1\1\1\4"+
-    "\2\5\2\6\1\5\1\2\2\5\2\2\1\7\1\4"+
-    "\4\2\1\0\1\2\1\0\1\2\1\0\1\2\1\0"+
-    "\1\2\7\0";
+    "\4\0\1\1\4\2\1\1\1\3\2\2\1\1\1\4"+
+    "\3\5\1\6\2\2\1\7\1\4\4\2\1\0\1\2"+
+    "\1\0\1\2\1\0\1\2\1\0\1\2\7\0";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[45];
+    int [] result = new int[42];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -222,15 +221,15 @@ public class Minijava {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\36\0\74\0\132\0\132\0\170\0\226\0\264"+
-    "\0\322\0\132\0\360\0\u010e\0\u012c\0\264\0\132\0\170"+
-    "\0\u014a\0\132\0\u0168\0\u0186\0\u010e\0\u012c\0\u01a4\0\u01c2"+
-    "\0\132\0\132\0\u01e0\0\u01fe\0\u021c\0\u023a\0\u0258\0\u0276"+
-    "\0\u0294\0\u02b2\0\u02d0\0\u02ee\0\u030c\0\u032a\0\u0348\0\u0366"+
-    "\0\u0384\0\u03a2\0\u03c0\0\u03de\0\u03fc";
+    "\0\0\0\36\0\74\0\132\0\170\0\170\0\226\0\264"+
+    "\0\322\0\360\0\170\0\u010e\0\u012c\0\u014a\0\322\0\170"+
+    "\0\u0168\0\u0186\0\170\0\u01a4\0\u01c2\0\170\0\170\0\u01e0"+
+    "\0\u01fe\0\u021c\0\u023a\0\u0258\0\u0276\0\u0294\0\u02b2\0\u02d0"+
+    "\0\u02ee\0\u030c\0\u032a\0\u0348\0\u0366\0\u0384\0\u03a2\0\u03c0"+
+    "\0\u03de\0\u03fc";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[45];
+    int [] result = new int[42];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -253,31 +252,31 @@ public class Minijava {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\4\1\5\1\6\1\7\1\5\1\10\1\4\1\5"+
-    "\1\11\1\5\1\12\1\5\1\12\12\10\1\13\2\10"+
-    "\1\5\2\14\1\15\1\4\1\5\1\6\1\7\1\5"+
-    "\1\10\1\4\1\5\1\11\1\5\1\12\1\5\1\12"+
-    "\1\16\1\10\1\16\1\10\1\16\3\10\1\16\1\10"+
-    "\1\13\2\10\1\5\2\14\1\15\2\17\1\20\1\21"+
-    "\1\22\1\10\1\17\1\5\1\23\1\24\1\12\1\5"+
-    "\1\12\12\10\1\13\2\10\1\17\2\25\1\26\37\0"+
-    "\2\6\37\0\1\5\32\0\2\10\2\0\2\10\5\0"+
-    "\16\10\14\0\1\27\1\22\25\0\2\10\2\0\2\10"+
-    "\5\0\15\10\1\30\37\0\1\5\37\0\1\5\4\0"+
-    "\1\22\41\0\1\27\1\31\34\0\1\32\25\0\3\27"+
-    "\2\0\31\27\1\0\2\10\2\0\2\10\5\0\6\10"+
-    "\1\33\7\10\5\0\2\10\2\0\2\10\5\0\1\10"+
-    "\1\34\14\10\5\0\2\10\2\0\2\10\5\0\4\10"+
-    "\1\35\11\10\5\0\2\10\2\0\2\10\5\0\12\10"+
-    "\1\36\3\10\4\0\1\37\2\40\2\0\2\40\3\37"+
-    "\2\0\1\10\15\40\4\37\16\0\1\41\20\0\2\10"+
-    "\2\0\2\10\5\0\2\10\1\42\13\10\30\0\1\43"+
-    "\12\0\2\10\2\0\2\10\5\0\10\10\1\44\5\10"+
-    "\21\0\1\45\21\0\2\10\2\0\2\10\5\0\1\10"+
-    "\1\46\14\10\4\0\3\47\2\0\5\47\3\0\22\47"+
-    "\2\10\2\0\2\10\3\47\2\0\16\10\4\47\23\0"+
-    "\1\50\42\0\1\51\32\0\1\52\31\0\1\53\31\0"+
-    "\1\54\37\0\1\55\37\0\1\5\14\0";
+    "\1\5\1\6\1\7\1\10\1\6\1\11\1\5\1\6"+
+    "\1\12\1\6\1\13\1\6\1\13\13\11\1\14\2\11"+
+    "\2\15\1\16\1\5\1\6\1\7\1\10\1\6\1\11"+
+    "\1\5\1\6\1\12\1\6\1\13\1\6\1\13\1\11"+
+    "\2\17\1\11\1\17\1\11\1\17\4\11\1\14\2\11"+
+    "\2\15\1\16\3\20\2\13\3\20\1\21\1\22\3\13"+
+    "\24\20\2\13\3\20\1\21\1\22\3\13\1\23\1\20"+
+    "\1\23\1\20\1\23\1\20\1\23\12\20\37\0\2\7"+
+    "\37\0\1\6\32\0\2\11\2\0\2\11\5\0\17\11"+
+    "\13\0\1\24\1\23\25\0\2\11\2\0\2\11\5\0"+
+    "\16\11\1\25\36\0\1\6\37\0\1\6\11\0\1\26"+
+    "\34\0\1\27\25\0\3\24\2\0\31\24\1\0\2\11"+
+    "\2\0\2\11\5\0\10\11\1\30\6\11\4\0\2\11"+
+    "\2\0\2\11\5\0\2\11\1\31\14\11\4\0\2\11"+
+    "\2\0\2\11\5\0\6\11\1\32\10\11\4\0\2\11"+
+    "\2\0\2\11\5\0\13\11\1\33\3\11\3\0\1\34"+
+    "\2\35\2\0\2\35\3\34\2\0\1\11\16\35\3\34"+
+    "\20\0\1\36\16\0\2\11\2\0\2\11\5\0\4\11"+
+    "\1\37\12\11\31\0\1\40\10\0\2\11\2\0\2\11"+
+    "\5\0\12\11\1\41\4\11\21\0\1\42\20\0\2\11"+
+    "\2\0\2\11\5\0\2\11\1\43\14\11\3\0\3\44"+
+    "\2\0\5\44\3\0\22\44\2\11\2\0\2\11\3\44"+
+    "\2\0\17\11\3\44\25\0\1\45\41\0\1\46\23\0"+
+    "\1\47\41\0\1\50\30\0\1\51\40\0\1\52\37\0"+
+    "\1\6\12\0";
 
   private static int [] zzUnpackTrans() {
     int [] result = new int[1050];
@@ -318,12 +317,12 @@ public class Minijava {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\3\0\2\11\4\1\1\11\4\1\1\11\2\1\1\11"+
-    "\6\1\2\11\4\1\1\0\1\1\1\0\1\1\1\0"+
+    "\4\0\2\11\4\1\1\11\4\1\1\11\2\1\1\11"+
+    "\2\1\2\11\4\1\1\0\1\1\1\0\1\1\1\0"+
     "\1\1\1\0\1\1\7\0";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[45];
+    int [] result = new int[42];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -715,11 +714,44 @@ public class Minijava {
         }
         if (zzPeek) yyline--;
       }
+      if (zzMarkedPosL > zzStartRead) {
+        switch (zzBufferL[zzMarkedPosL-1]) {
+        case '\n':
+        case '\u000B':
+        case '\u000C':
+        case '\u0085':
+        case '\u2028':
+        case '\u2029':
+          zzAtBOL = true;
+          break;
+        case '\r': 
+          if (zzMarkedPosL < zzEndReadL)
+            zzAtBOL = zzBufferL[zzMarkedPosL] != '\n';
+          else if (zzAtEOF)
+            zzAtBOL = false;
+          else {
+            boolean eof = zzRefill();
+            zzMarkedPosL = zzMarkedPos;
+            zzEndReadL = zzEndRead;
+            zzBufferL = zzBuffer;
+            if (eof) 
+              zzAtBOL = false;
+            else 
+              zzAtBOL = zzBufferL[zzMarkedPosL] != '\n';
+          }
+          break;
+        default:
+          zzAtBOL = false;
+        }
+      }
       zzAction = -1;
 
       zzCurrentPosL = zzCurrentPos = zzStartRead = zzMarkedPosL;
   
-      zzState = ZZ_LEXSTATE[zzLexicalState];
+      if (zzAtBOL)
+        zzState = ZZ_LEXSTATE[zzLexicalState+1];
+      else
+        zzState = ZZ_LEXSTATE[zzLexicalState];
 
       // set up zzAction for empty match case:
       int zzAttributes = zzAttrL[zzState];

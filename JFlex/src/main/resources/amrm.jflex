@@ -18,22 +18,19 @@ intl =  0|[1-9][0-9]*
 flinha = \r|\n|\r\n
 id = (_|[:jletter:])(_|[:jletterdigit:])*
 ws = {flinha} | [\ \t\f]
-wso = [\ \t\f]
 comlinha = "//"[^\r\n]*
 
-%state TAG IF WHILE COMENT
+%states IF WHILE INT
+%xstates COMENT 
 
 %%
 <COMENT>{
 	"/*" {throw new RuntimeException("Aninhamento de comentário não permitido!" + "-> na linha: " + yyline + ", coluna: " + yycolumn);}
-	"*" {}
-	{id} {}
-	{wso} {}
-	{flinha} {yybegin(COMENT);}
+	!"*/" {yybegin(COMENT);}
 	"*/" {yybegin(YYINITIAL);}
 	. 	 {throw new RuntimeException("Comentário com erro : " + yytext() + "-> na linha: " + yyline + ", coluna: " + yycolumn);}
 }
-<TAG> {
+<INT> {
 	[intl] {yybegin(YYINITIAL);}
 }
 {comlinha} {} //comentario de linha
