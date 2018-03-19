@@ -16,30 +16,29 @@ package atividade1;
 /* Insira as regras l�xicas abaixo */
 intl =  0|[1-9][0-9]*
 flinha = \r|\n|\r\n
-ic = [^\r\n]
 id = (_|[:jletter:])(_|[:jletterdigit:])*
 ws = {flinha} | [\ \t\f]
+wso = [\ \t\f]
 comlinha = "//"[^\r\n]*
-comente = "/*"
 
-%state TAG
+%state TAG IF WHILE COMENT
 
 %%
+<COMENT>{
+	"/*" {throw new RuntimeException("Aninhamento de comentário não permitido!" + "-> na linha: " + yyline + ", coluna: " + yycolumn);}
+	"*" {}
+	{id} {}
+	{wso} {}
+	{flinha} {yybegin(COMENT);}
+	"*/" {yybegin(YYINITIAL);}
+	. 	 {throw new RuntimeException("Comentário com erro : " + yytext() + "-> na linha: " + yyline + ", coluna: " + yycolumn);}
+}
 <TAG> {
 	[intl] {yybegin(YYINITIAL);}
 }
-{intl} {
-	try {
-		System.out.println(yytext());
-		Integer.parseInt(yytext());
-	}catch(Exception e) {
-		throw new RuntimeException();
-	}
-}
 {comlinha} {} //comentario de linha
-{comente} {} //testar o comentário especifico
+"/*" {yybegin(COMENT);} //testar o comentário especifico
 {ws} {}
-{id} {} 
 boolean {}
 class {}
 public {}
@@ -59,12 +58,13 @@ false {}
 this {}
 new {}
 System.out.println {}
-"{" {}
-"}" {}
-"[" {}
-"]" {}
-"(" {}
-")" {}
+{intl} {
+	
+}
+{id} {}
+"{"|"}" {}
+"["|"]" {}
+"("|")" {}
 ";" {}
 "." {}
 "," {}
