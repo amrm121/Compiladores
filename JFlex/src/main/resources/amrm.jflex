@@ -43,7 +43,7 @@ endlim = ";"{wso}*?
 	{id} {yybegin(LEXA1);}
 	<LEXA1>{
 		{delim} {yybegin(YYINITIAL);}
-		";"{wso}*?$ {yybegin(YYINITIAL);}
+		{endlim}$ {yybegin(YYINITIAL);}
 	}
 	. {throw new RuntimeException("Tipo básico[] inicializado sem variável." + " Na linha: " + (yyline+1) + ", coluna: " + (yycolumn+1));}
 }
