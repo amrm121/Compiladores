@@ -24,9 +24,9 @@ wso = [\ \t\f]
 comlinha = "//"[^\r\n]*
 ops = "&&" | "<" | "==" | "!=" | "+" | "-" | "*" | "!"
 delim = "." | "," | "=" | "(" | ")" | "[" | "]" | "{" | "}"
-endlim = ";"{wso}*?$
+endlim = ";"{wso}*?
 
-%xstates COMENT LEX LEXA
+%xstates COMENT LEX LEXA LEXA1
 
 %%
 <COMENT>{
@@ -39,7 +39,12 @@ endlim = ";"{wso}*?$
 }
 <LEXA>{
 	"["{intl}?"]"{wso}*? {}
-	 {id}?|{endlim} {yybegin(YYINITIAL);}
+	{endlim}$ {yybegin(YYINITIAL);}
+	{id} {yybegin(LEXA1);}
+	<LEXA1>{
+		{delim} {yybegin(YYINITIAL);}
+		";"{wso}*?$ {yybegin(YYINITIAL);}
+	}
 	. {throw new RuntimeException("Tipo básico[] inicializado sem variável." + " Na linha: " + (yyline+1) + ", coluna: " + (yycolumn+1));}
 }
 {comlinha} {} //comentario de linha
@@ -69,7 +74,7 @@ new {}
 {ops} {}
 System.out.println {}
 {intl} / \P{L} {} //usando o lookahead '/' pra nao deixar nenhum inteiro passar como intl id intl como acontecia em 99c9 99 token intl c9 token id
- {} //; apenas no fim de linha (mesmo que tenham espaços em branco)
+{endlim}$ {} //; apenas no fim de linha (mesmo que tenham espaços em branco)
 {delim} {}
 . { throw new RuntimeException("Caractere ilegal! " + " na linha: " + (yyline+1) + ", coluna: " + (yycolumn+1)); }
 
