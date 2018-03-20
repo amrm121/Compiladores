@@ -1,5 +1,6 @@
 package atividade1;
 
+
 %%
 
 /* N�o altere as configura��es a seguir */
@@ -14,24 +15,22 @@ package atividade1;
 %eofclose
 
 /* Insira as regras l�xicas abaixo */
+
 intl =  0|[1-9][0-9]*
 flinha = \r|\n|\r\n
 id = (_|[:jletter:])(_|[:jletterdigit:])*
 ws = {flinha} | [\ \t\f]
 comlinha = "//"[^\r\n]*
 
-%states IF WHILE INT
-%xstates COMENT 
+%xstates COMENT INT
 
 %%
 <COMENT>{
-	"/*" {throw new RuntimeException("Aninhamento de comentário não permitido!" + "-> na linha: " + yyline + ", coluna: " + yycolumn);}
-	!"*/" {yybegin(COMENT);}
-	"*/" {yybegin(YYINITIAL);}
-	. 	 {throw new RuntimeException("Comentário com erro : " + yytext() + "-> na linha: " + yyline + ", coluna: " + yycolumn);}
+	~"*/" {yybegin(YYINITIAL);}
+	. {throw new RuntimeException("Comentário sem fim." + " Na linha: " + yyline+1 + ", coluna: " + yycolumn+1);}
 }
-<INT> {
-	[intl] {yybegin(YYINITIAL);}
+<INT>{
+	. {yybegin(YYINITIAL);}
 }
 {comlinha} {} //comentario de linha
 "/*" {yybegin(COMENT);} //testar o comentário especifico
@@ -44,7 +43,7 @@ static {}
 void {}
 main {}
 String {}
-int {}
+int/\s{id} {}
 while {}
 if {}
 else {}
@@ -54,15 +53,16 @@ true {}
 false {}
 this {}
 new {}
-System.out.println {}
-{intl} {
-	
-}
+System.out.println/"("~")" {}
+{intl}/\P{L} {}
 {id} {}
-"{"|"}" {}
-"["|"]" {}
-"("|")" {}
-";" {}
+"{" {}
+"}" {}
+"[" {}
+"]" {}
+"(" {}
+")" {}
+";"{ws}*?$ {}
 "." {}
 "," {}
 "=" {}
@@ -74,5 +74,5 @@ System.out.println {}
 "==" {}
 "<" {}
 "&&" {}
-. { throw new RuntimeException("Caractere ilegal! '" + yytext() + "' na linha: " + yyline + ", coluna: " + yycolumn); }
+. { throw new RuntimeException("Caractere ilegal!" + "'" + yycharat(yyline+1) + "'" + " na linha: " + (yyline+1) + ", coluna: " + (yycolumn+1)); }
 
