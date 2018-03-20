@@ -82,7 +82,7 @@ class BS{
 
 	if (this.Compare(a_ux_01,num)) bs01 = true ;
 	else bs01 = false ;
-	return bs01 ;
+	return bs01;
     }
 
     // This method computes and returns the

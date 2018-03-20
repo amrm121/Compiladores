@@ -23,11 +23,10 @@ ws = {flinha} | [\ \t\f]
 wso = [\ \t\f]
 comlinha = "//"[^\r\n]*
 ops = "&&" | "<" | "==" | "!=" | "+" | "-" | "*" | "!"
-delim = "." | "," | "=" | "(" | ")" | "[" | "]" | "{" | "}" | ";"
+delim = "." | "," | "=" | "(" | ")" | "[" | "]" | "{" | "}"
 endlim = ";"{wso}*?
 
 %xstates COMENT LEX 
-//LEXA LEXA1
 
 %%
 <COMENT>{
@@ -38,14 +37,6 @@ endlim = ";"{wso}*?
 	{wso}+{id} {yybegin(YYINITIAL);}
 	. {throw new RuntimeException("Tipo basico inicializado sem variavel." + " Na linha: " + (yyline+1) + ", coluna: " + (yycolumn+1));}
 }
-/*<LEXA>{  tentativa falha em analisar se e um tipo basico incializado com array
-	"["{intl}?"]"{wso}*? {}
-	{id}?{delim} {yybegin(LEXA1);}
-	<LEXA1>{
-		{endlim}$ {yybegin(YYINITIAL);}
-	}
-	. {throw new RuntimeException("Tipo basico[] inicializado sem variavel." + " Na linha: " + (yyline+1) + ", coluna: " + (yycolumn+1));}
-}*/
 {comlinha} {} //comentario de linha
 "/*" {yybegin(COMENT);} //testar o comentário especifico
 {ws} {}
