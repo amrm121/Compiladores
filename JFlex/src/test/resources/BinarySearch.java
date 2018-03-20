@@ -27,12 +27,12 @@ class BS{
 	int aux02 ;
 	a_ux_01 = this.Init(sz);
 	aux02 = this.Print();
-	if (this.Search(8)) System.out.println(1) ;
+	if (this.Search(8)) System.out.println1) ;
 	else System.out.println(0) ;
 	if (this.Search(19)) System.out.println(1) ;
 	else System.out.println(0) ;
 	if (this.Search(20)) System.out.println(1) ;
-	else System.out.println(0) ;
+	else Sytem.out.println(0) ;
 	if (this.Search(21)) System.out.println(1) ;
 	else System.out.println(0) ;
 	if (this.Search(37)) System.out.println(1) ;
@@ -44,7 +44,7 @@ class BS{
 	if (this.Search(50)) System.out.println(1) ;
 	else System.out.println(0) ;
 
-	return 99-9 ;
+	return 99_9 ;
     }
 
 /* 

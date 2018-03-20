@@ -20,30 +20,42 @@ intl =  0|[1-9][0-9]*
 flinha = \r|\n|\r\n
 id = (_|[:jletter:])(_|[:jletterdigit:])*
 ws = {flinha} | [\ \t\f]
+wso = [\ \t\f]
 comlinha = "//"[^\r\n]*
+ops = "&&" | "<" | "==" | "!=" | "+" | "-" | "*" | "!"
+delim = "." | "," | "=" | "(" | ")" | "[" | "]" | "{" | "}"
+endlim = ";"{wso}*?$
 
-%xstates COMENT INT
+%xstates COMENT LEX LEXA
 
 %%
 <COMENT>{
 	~"*/" {yybegin(YYINITIAL);}
-	. {throw new RuntimeException("Comentário sem fim." + " Na linha: " + yyline+1 + ", coluna: " + yycolumn+1);}
+	. {throw new RuntimeException("Comentário sem fim." + " Na linha: " + (yyline+1) + ", coluna: " + (yycolumn+1));}
 }
-<INT>{
-	. {yybegin(YYINITIAL);}
+<LEX>{
+	{wso}+{id} {yybegin(YYINITIAL);}
+	. {throw new RuntimeException("Tipo básico inicializado sem variável." + " Na linha: " + (yyline+1) + ", coluna: " + (yycolumn+1));}
+}
+<LEXA>{
+	"["{intl}?"]"{wso}*? {}
+	 {id}?|{endlim} {yybegin(YYINITIAL);}
+	. {throw new RuntimeException("Tipo básico[] inicializado sem variável." + " Na linha: " + (yyline+1) + ", coluna: " + (yycolumn+1));}
 }
 {comlinha} {} //comentario de linha
 "/*" {yybegin(COMENT);} //testar o comentário especifico
 {ws} {}
-boolean {}
+boolean {yybegin(LEX);}
 class {}
 public {}
 extends {} 
 static {}
 void {}
 main {}
-String {}
-int/\s{id} {}
+String / "["~"]" {yybegin(LEXA);}
+String {yybegin(LEX);}
+int / "["~"]" {yybegin(LEXA);} //int quando declarado sempre deve ser seguido de um identificador[
+int {yybegin(LEX);}
 while {}
 if {}
 else {}
@@ -53,26 +65,11 @@ true {}
 false {}
 this {}
 new {}
-System.out.println/"("~")" {}
-{intl}/\P{L} {}
 {id} {}
-"{" {}
-"}" {}
-"[" {}
-"]" {}
-"(" {}
-")" {}
-";"{ws}*?$ {}
-"." {}
-"," {}
-"=" {}
-"*" {}
-"+" {}
-"-" {}
-"!" {}
-"!=" {}
-"==" {}
-"<" {}
-"&&" {}
-. { throw new RuntimeException("Caractere ilegal!" + "'" + yycharat(yyline+1) + "'" + " na linha: " + (yyline+1) + ", coluna: " + (yycolumn+1)); }
+{ops} {}
+System.out.println {}
+{intl} / \P{L} {} //usando o lookahead '/' pra nao deixar nenhum inteiro passar como intl id intl como acontecia em 99c9 99 token intl c9 token id
+ {} //; apenas no fim de linha (mesmo que tenham espaços em branco)
+{delim} {}
+. { throw new RuntimeException("Caractere ilegal! " + " na linha: " + (yyline+1) + ", coluna: " + (yycolumn+1)); }
 

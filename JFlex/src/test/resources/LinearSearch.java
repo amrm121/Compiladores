@@ -80,6 +80,7 @@ class LS {
 	int k ;
 	int aux01 ;
 	int aux02 ;
+	int ;
 
 	size = sz ;
 	number = new int[sz] ;
