@@ -17,8 +17,11 @@ package atividade1;
 /* Insira as regras l�xicas abaixo */
 
 intl =  0|[1-9][0-9]*
+ints = [0-9]
 flinha = \r|\n|\r\n
-id = (_|[:jletter:])(_|[:jletterdigit:])*
+letra = [a-z]|[A-Z]
+idpart = {letra}|{ints}
+id = (_|{letra})(_|{idpart})*
 ws = {flinha} | [\ \t\f]
 wso = [\ \t\f]
 comlinha = "//"[^\r\n]*
@@ -67,4 +70,3 @@ System.out.println {}
 {endlim}$ {} //; apenas no fim de linha (mesmo que tenham espaços em branco)
 {delim} {}
 . { throw new RuntimeException("Caractere ilegal! " + " na linha: " + (yyline+1) + ", coluna: " + (yycolumn+1)); }
-
